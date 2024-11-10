@@ -9,8 +9,15 @@ class ItemSerializer(serializers.ModelSerializer):
         fields = ["id", "item_name", "price"]
 
 
-class OrderItemSerializer(serializers.ModelSerializer):
-    # item = ItemSerializer()
+class OrderItemReadSerializer(serializers.ModelSerializer):
+    item = ItemSerializer()
+
+    class Meta:
+        model = OrderItems
+        fields = ["id", "item", "quantity"]
+
+
+class OrderItemWriteSerializer(serializers.ModelSerializer):
     item = serializers.PrimaryKeyRelatedField(queryset=Items.objects.all())
 
     class Meta:
@@ -18,9 +25,17 @@ class OrderItemSerializer(serializers.ModelSerializer):
         fields = ["id", "item", "quantity"]
 
 
-class OrderSerializer(serializers.ModelSerializer):
-    order_items = OrderItemSerializer(many=True)
-    # customer = serializers.StringRelatedField()
+class OrderReadSerializer(serializers.ModelSerializer):
+    order_items = OrderItemReadSerializer(many=True, read_only=True)
+    customer = serializers.StringRelatedField()
+
+    class Meta:
+        model = Orders
+        fields = ["id", "customer", "order_date", "order_items"]
+
+
+class OrderWriteSerializer(serializers.ModelSerializer):
+    order_items = OrderItemWriteSerializer(many=True)
     customer = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     class Meta:
@@ -31,13 +46,12 @@ class OrderSerializer(serializers.ModelSerializer):
         customer = validated_data.pop("customer")
         order_date = validated_data.pop("order_date")
 
-        order_items_data = validated_data.pop("order_items", [])
         order = Orders.objects.create(customer=customer, order_date=order_date)
 
+        order_items_data = validated_data.pop("order_items", [])
         for item_data in order_items_data:
             item = item_data["item"]
             quantity = item_data["quantity"]
-            print(str(item), str(quantity))
             OrderItems.objects.create(order=order, item=item, quantity=quantity)
 
         return order
@@ -62,7 +76,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    orders = OrderSerializer(many=True, read_only=True, source="orders_set")
+    orders = OrderReadSerializer(many=True, read_only=True, source="orders_set")
 
     class Meta:
         model = User

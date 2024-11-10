@@ -2,8 +2,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from orders_app.models import Orders, OrderItems
-from .serializers import UserSerializer, OrderSerializer
+from orders_app.models import Orders
+from .serializers import UserSerializer, OrderReadSerializer, OrderWriteSerializer
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -13,11 +13,15 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Orders.objects.all()
-    serializer_class = OrderSerializer
+    serializer_class = OrderReadSerializer
+
+    def get_serializer_class(self):
+        if self.action == "create" or self.action == "update":
+            return OrderWriteSerializer
+        return OrderReadSerializer
 
     @action(detail=False, methods=["get"])
     def expensive(self, request):
-        # Находим самый дорогой заказ
         expensive_order = max(
             self.queryset,
             key=lambda order: sum(
