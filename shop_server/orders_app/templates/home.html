@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+{% block title %}Home | Order Management System{% endblock %}
+
+{% block content %}
+<section class="home-intro">
+    <h2>Welcome to the Order Management System</h2>
+    <p>This system allows you to manage orders and items efficiently.</p>
+</section>
+
+<section class="quick-links">
+    <h3>Quick Links</h3>
+    <div class="links-container">
+        <a href="{% url 'order-list' %}" class="link-button">View All Orders</a> 
+        <a href="{% url 'order-create' %}" class="link-button">Create New Order</a>
+        <a href="{% url 'item-list' %}" class="link-button">View All Items</a>
+        <a href="{% url 'item-create' %}" class="link-button">Add New Item</a>
+    </div>
+</section>
+
+<section class="statistics">
+    <h3>Statistics</h3>
+    <ul>
+        <li>Total Orders: {{ orders_count }}</li>
+        <li>Total Items: {{ items_count }}</li>
+    </ul>
+</section>
+
+{% endblock %}
+

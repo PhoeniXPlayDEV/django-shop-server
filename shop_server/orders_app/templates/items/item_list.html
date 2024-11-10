@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1>Items</h1>
+<button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'item-create' %}'">Add New Item</button>
+<ul>
+    {% for item in items %}
+        <li>
+            <a href="{% url 'item-detail' item.id %}">{{ item.item_name }}</a> - {{ item.price }} $
+        </li>
+    {% empty %}
+        <li>No items found.</li>
+    {% endfor %}
+</ul>
+
+{% include 'pagination.html' %}
+
+{% endblock %}
+

@@ -1,0 +1,97 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1>{% if form.instance.pk %}Update Order #{{ form.instance.pk }}{% else %}Create Order{% endif %}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <h3>Order Items</h3>
+    <table id="order-items-table">
+        {{ formset.management_form }}
+        {% for f in formset %}
+            <tr id="form-row-{{ forloop.counter0 }}">
+
+                <td>{{ f.as_p }}</td>
+
+                <!--
+                <td>{{ form.item.id }}</td> 
+                <td>{{ form.item.label }}: {{ form.item }}</td>
+                <td>{{ form.quantity.label }}: {{ form.quantity }}</td>
+                -->
+
+                <td>
+                    <button type="button" class="delete-item-btn" data-form-id="{{ forloop.counter0 }}">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Кнопка для добавления нового элемента -->
+    <button type="button" id="add-item">Add Item</button>
+    <button type="submit">Save</button>
+
+    {% if form.instance.pk %}
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'order-detail' form.instance.pk %}'">Cancel</button>
+    {% else %} 
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'order-list' %}'">Cancel</button>
+    {% endif %}
+</form>
+
+<script>
+    document.getElementById('add-item').addEventListener('click', function() {
+        var formset = document.querySelector('#order-items-table');
+        var totalForms = document.getElementById('id_order_items-TOTAL_FORMS');
+        var currentForm = totalForms.value;
+
+        // Клонируем первую строку формы
+        var newForm = formset.querySelector('tr').cloneNode(true);
+
+        // Обновляем name и id для нового элемента
+        newForm.querySelectorAll('input, select').forEach(function(input) {
+            var name = input.name.replace('-0-', `-${currentForm}-`);
+            input.name = name;
+            input.id = input.id.replace('-0-', `-${currentForm}-`);
+            input.value = '';  // очищаем значение
+        });
+
+        // Обновляем кнопку удаления для нового элемента
+        var deleteButton = newForm.querySelector('.delete-item-btn');
+        deleteButton.setAttribute('data-form-id', currentForm);
+        deleteButton.addEventListener('click', function() {
+            newForm.remove();
+            updateFormIndexes();
+        });
+
+        formset.appendChild(newForm);
+        totalForms.value = parseInt(currentForm) + 1;
+    });
+
+    // Функция для обновления индексов форм при удалении
+    function updateFormIndexes() {
+        document.querySelectorAll('#order-items-table tr').forEach((row, index) => {
+            row.querySelectorAll('input, select').forEach(input => {
+                input.name = input.name.replace(/\-\d+\-/, `-${index}-`);
+                input.id = input.id.replace(/\-\d+\-/, `-${index}-`);
+            });
+            var deleteButton = row.querySelector('.delete-item-btn');
+            deleteButton.setAttribute('data-form-id', index);
+        });
+
+        // Обновляем значение TOTAL_FORMS
+        document.getElementById('id_order_items-TOTAL_FORMS').value = document.querySelectorAll('#order-items-table tr').length;
+    }
+
+    // Изначально устанавливаем обработчики для кнопок удаления
+    document.querySelectorAll('.delete-item-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            var formId = this.dataset.formId;
+            var formRow = document.querySelector(`#form-row-${formId}`);
+            formRow.remove();
+            updateFormIndexes();
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+{% block title %}Order Details{% endblock %}
+
+{% block content %}
+<h2>Details of Order #{{ order.id }}</h2>
+
+<p><strong>Customer Name:</strong> {{ order.customer.username }}</p>
+<p><strong>Created At:</strong> {{ order.order_date }}</p>
+
+<h3>Items:</h3>
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+    </tr>
+    {% for order_item in order_items %}
+    <tr>
+        <td>{{ order_item.item.item_name }}</td>
+        <td>{{ order_item.quantity }}</td>
+        <td>{{ order_item.item.price }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No items in this order.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'order-update' order.id %}'">Edit</button>
+<button type="button" class="btn btn-danger" onclick="window.location.href='{% url 'order-delete' order.id %}'">Delete</button>
+<button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'order-list' %}'">Back to Order List</button>
+
+{% endblock %}
+

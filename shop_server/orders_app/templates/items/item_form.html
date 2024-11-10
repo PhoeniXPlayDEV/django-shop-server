@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1>{% if form.instance.pk %}Update Item{% else %}Create Item{% endif %}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+    {% if form.instance.pk %}
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'item-detail' form.instance.pk %}'">Cancel</button>
+    {% else %}
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'item-list' %}'">Cancel</button>
+    {% endif %}
+</form>
+{% endblock %}
+

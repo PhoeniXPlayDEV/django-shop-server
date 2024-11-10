@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1>Orders</h1>
+<button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'order-create' %}'">Create New Order</button>
+<ul>
+    {% for order in orders %}
+        <li>
+            <a href="{% url 'order-detail' order.id %}">Order {{ order.id }} by {{ order.customer.username }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% include 'pagination.html' %}
+
+{% endblock %}
+

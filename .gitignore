@@ -1,0 +1,79 @@
+# Виртуальные окружения
+venv/
+env/
+shop-env/
+
+# Файлы конфигурации окружения
+*.env
+.env.*
+.envrc
+
+# Файлы миграций Django
+**/migrations/*
+
+# Секретные и конфиденциальные файлы
+secret_key.txt
+config.json
+
+# Системные файлы macOS и другие
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Логи и временные файлы
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+*.bak
+*.orig
+
+# Кэшированные файлы Python
+__pycache__/
+*.py[cod]
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.iml
+*.sublime-workspace
+*.sublime-project
+
+# Файлы базы данных
+*.sqlite3
+*.db
+
+# Файлы static и media
+# static/
+# media/
+
+# Docker
+# docker-compose.yml
+# Dockerfile
+# *.dockerignore
+
+# Файлы из плагина rope (используется для автоимпорта в некоторых редакторах)
+.ropeproject/
+
+# Файлы node_modules, если используется Node.js для фронтенда
+node_modules/
+
+# Файлы для сборки
+dist/
+build/
+
+# Файлы, созданные coverage
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.tox/
+
+# Файлы тестов
+test_results/
+
+# Конфигурация Celery
+celerybeat-schedule
