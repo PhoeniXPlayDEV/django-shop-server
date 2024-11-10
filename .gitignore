@@ -77,3 +77,6 @@ test_results/
 
 # Конфигурация Celery
 celerybeat-schedule
+
+# Менеджеры пакетов
+.pdm-python
