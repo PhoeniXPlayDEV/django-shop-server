@@ -2,11 +2,10 @@
 
 {% block content %}
 <h1>Confirm Delete</h1>
-<p>Are you sure you want to delete {{ item.name }}?</p>
+<p>Are you sure you want to delete {{ object.item_name }}?</p>
 <form method="post">
     {% csrf_token %}
     <button type="submit">Yes, delete</button>
-    <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'item-list' %}'">Cancel</button>
+    <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'item-detail-app' object.id %}'">Cancel</button>
 </form>
 {% endblock %}
-

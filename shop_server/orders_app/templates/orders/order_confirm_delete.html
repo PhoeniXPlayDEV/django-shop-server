@@ -6,7 +6,7 @@
 <form method="post">
     {% csrf_token %}
     <button type="submit">Yes, delete</button>
-    <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'order-list' %}'">Cancel</button>
+    <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'order-detail-app' object.id %}'">Cancel</button>
 </form>
 {% endblock %}
 

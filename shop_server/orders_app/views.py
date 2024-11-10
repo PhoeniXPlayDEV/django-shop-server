@@ -60,7 +60,7 @@ class OrderCreateView(CreateView):
             self.object = form.save()
             formset.instance = self.object
             formset.save()
-            return redirect("order-list")
+            return redirect("order-list-app")
         else:
             return self.form_invalid(form)
 
@@ -88,7 +88,7 @@ class OrderUpdateView(UpdateView):
             self.object = form.save()
             formset.instance = self.object
             formset.save()
-            return redirect("order-list")
+            return redirect("order-list-app")
         else:
             return self.form_invalid(form)
 
@@ -96,7 +96,7 @@ class OrderUpdateView(UpdateView):
 class OrderDeleteView(DeleteView):
     model = Orders
     template_name = "orders/order_confirm_delete.html"
-    success_url = reverse_lazy("order-list")
+    success_url = reverse_lazy("order-list-app")
 
 
 # Items Views
@@ -117,17 +117,17 @@ class ItemCreateView(CreateView):
     model = Items
     fields = ["item_name", "price"]
     template_name = "items/item_form.html"
-    success_url = reverse_lazy("item-list")
+    success_url = reverse_lazy("item-list-app")
 
 
 class ItemUpdateView(UpdateView):
     model = Items
     fields = ["item_name", "price"]
     template_name = "items/item_form.html"
-    success_url = reverse_lazy("item-list")
+    success_url = reverse_lazy("item-list-app")
 
 
 class ItemDeleteView(DeleteView):
     model = Items
     template_name = "items/item_confirm_delete.html"
-    success_url = reverse_lazy("item-list")
+    success_url = reverse_lazy("item-list-app")

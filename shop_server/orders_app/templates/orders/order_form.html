@@ -33,9 +33,9 @@
     <button type="submit">Save</button>
 
     {% if form.instance.pk %}
-        <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'order-detail' form.instance.pk %}'">Cancel</button>
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'order-detail-app' form.instance.pk %}'">Cancel</button>
     {% else %} 
-        <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'order-list' %}'">Cancel</button>
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'order-list-app' %}'">Cancel</button>
     {% endif %}
 </form>
 

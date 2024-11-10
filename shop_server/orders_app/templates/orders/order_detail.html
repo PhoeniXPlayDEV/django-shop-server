@@ -28,9 +28,9 @@
     {% endfor %}
 </table>
 
-<button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'order-update' order.id %}'">Edit</button>
-<button type="button" class="btn btn-danger" onclick="window.location.href='{% url 'order-delete' order.id %}'">Delete</button>
-<button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'order-list' %}'">Back to Order List</button>
+<button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'order-update-app' order.id %}'">Edit</button>
+<button type="button" class="btn btn-danger" onclick="window.location.href='{% url 'order-delete-app' order.id %}'">Delete</button>
+<button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'order-list-app' %}'">Back to Order List</button>
 
 {% endblock %}
 

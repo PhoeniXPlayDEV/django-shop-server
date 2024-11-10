@@ -2,11 +2,11 @@
 
 {% block content %}
 <h1>Items</h1>
-<button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'item-create' %}'">Add New Item</button>
+<button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'item-create-app' %}'">Add New Item</button>
 <ul>
     {% for item in items %}
         <li>
-            <a href="{% url 'item-detail' item.id %}">{{ item.item_name }}</a> - {{ item.price }} $
+            <a href="{% url 'item-detail-app' item.id %}">{{ item.item_name }}</a> - {{ item.price }} $
         </li>
     {% empty %}
         <li>No items found.</li>

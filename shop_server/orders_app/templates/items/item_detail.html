@@ -4,9 +4,9 @@
 <h2>{{ item.item_name }}</h2>
 <p>Price: {{ item.price }} $</p>
 
-<button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'item-update' item.id %}'">Edit</button>
-<button type="button" class="btn btn-danger" onclick="window.location.href='{% url 'item-delete' item.id %}'">Delete</button>
-<button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'item-list' %}'">Back to Item List</button>
+<button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'item-update-app' item.id %}'">Edit</button>
+<button type="button" class="btn btn-danger" onclick="window.location.href='{% url 'item-delete-app' item.id %}'">Delete</button>
+<button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'item-list-app' %}'">Back to Item List</button>
 
 {% endblock %}
 
