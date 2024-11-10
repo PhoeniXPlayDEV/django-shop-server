@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:8c0969b1ce7a84f99e94ddc81260fa7c57a53d431f618529ac6cf1171da50e80"
+content_hash = "sha256:9ec29d5dc6be2d0a51f016dcc3b2c6db502ff70cc8431a468e84c6f96a52e583"
 
 [[metadata.targets]]
 requires_python = "==3.13.*"
@@ -64,6 +64,16 @@ groups = ["dev"]
 files = [
     {file = "isort-5.13.2-py3-none-any.whl", hash = "sha256:8ca5e72a8d85860d5a3fa69b8745237f2939afe12dbf656afbcb47fe72d947a6"},
     {file = "isort-5.13.2.tar.gz", hash = "sha256:48fdfcb9face5d58a4f6dde2e72a1fb8dcaf8ab26f95ab49fab84c2ddefb0109"},
+]
+
+[[package]]
+name = "python-decouple"
+version = "3.8"
+summary = "Strict separation of settings from code."
+groups = ["default"]
+files = [
+    {file = "python-decouple-3.8.tar.gz", hash = "sha256:ba6e2657d4f376ecc46f77a3a615e058d93ba5e465c01bbe57289bfb7cce680f"},
+    {file = "python_decouple-3.8-py3-none-any.whl", hash = "sha256:d0d45340815b25f4de59c974b855bb38d03151d81b037d9e3f463b0c9f8cbd66"},
 ]
 
 [[package]]
