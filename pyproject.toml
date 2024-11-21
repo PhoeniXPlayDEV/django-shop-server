@@ -23,3 +23,7 @@ dev = [
     "ruff>=0.7.1",
     "isort>=5.13.2",
 ]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "shop_server.settings"
+python_files = ["test_*.py", "*_test.py", "tests.py"]
